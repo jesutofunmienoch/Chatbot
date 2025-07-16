@@ -1,27 +1,58 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    /* Basic Options */
+    "target": "ES2022",                          // Target modern JavaScript
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],    // Include browser and modern features
+    "module": "ESNext",                          // Use modern module system
+    "moduleResolution": "Bundler",               // Optimized for tools like Turbopack/Vite
+    "resolveJsonModule": true,                   // Allow importing JSON files
+    "baseUrl": ".",                              // Required for path aliases
+    "paths": {
+      "@/*": ["./*"]                             // Support @/components, @/lib, etc.
+    },
+
+    /* JavaScript Support */
+    "allowJs": true,                             // Allow .js files in the project
+    "checkJs": false,                            // Don’t type-check .js files (safe default)
+
+    /* JSX and React */
+    "jsx": "preserve",                           // Let Next.js handle JSX transform
+    "isolatedModules": true,                     // Required by Next.js (especially App Router)
+
+    /* Type Checking */
+    "strict": true,                              // Enable all strict type-checking options
+    "noImplicitAny": true,                       // Raise error on variables with `any` type
+    "noUnusedLocals": true,                      // Report unused local variables
+    "noUnusedParameters": true,                  // Report unused function parameters
+    "noImplicitReturns": true,                   // Ensure all code paths return a value
+    "noFallthroughCasesInSwitch": true,          // Prevent accidental case fallthrough
+
+    /* Output Settings */
+    "noEmit": true,                              // Do not output compiled files
+    "incremental": true,                         // Enable faster rebuilds with incremental compilation
+
+    /* Interop & Module Compatibility */
+    "esModuleInterop": true,                     // Enables default imports from CJS modules
+    "allowSyntheticDefaultImports": true,        // Allow default imports even if module doesn’t export default
+
+    /* Skip type checking for declaration files */
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+
+    /* Plugin for Next.js support */
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
