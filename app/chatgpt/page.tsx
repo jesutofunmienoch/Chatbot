@@ -39,7 +39,6 @@ const FormSchema = z.object({
 
 export default function TextareaForm() {
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string; timestamp: string }[]>([])
-  const [loading, setLoading] = useState(false)
   const [typing, setTyping] = useState("")
   const [copiedId, setCopiedId] = useState<number | null>(null)
   const [typingDone, setTypingDone] = useState(true)
@@ -77,7 +76,6 @@ export default function TextareaForm() {
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     setMessages((prev) => [...prev, { role: "user", content: userMessage, timestamp }])
     form.reset()
-    setLoading(true)
     setTypingDone(false)
 
     try {
@@ -121,8 +119,6 @@ export default function TextareaForm() {
     } catch {
       toast.error("Failed to get AI response.")
       setTypingDone(true)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -141,13 +137,11 @@ export default function TextareaForm() {
     return (
       <div key={idx} className="w-full flex justify-center">
         <div className="w-full md:w-[80%] max-w-[650px]">
-         <div className={`text-sm whitespace-pre-wrap leading-relaxed relative ${
-  isUser
-    ? "bg-muted dark:bg-gray-700 text-white px-4 py-2 rounded-xl ml-auto max-w-[45%]"
-    : "text-white w-full"
-}`}>
-
-
+          <div className={`text-sm whitespace-pre-wrap leading-relaxed relative ${
+            isUser
+              ? "bg-muted dark:bg-gray-700 text-white px-4 py-2 rounded-xl ml-auto max-w-[45%]"
+              : "text-white w-full"
+          }`}>
             <div className="text-xs text-muted-foreground mb-1">
               {isUser ? "You" : "ChatGPT"} • {msg.timestamp}
             </div>
